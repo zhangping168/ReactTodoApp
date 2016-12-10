@@ -7,10 +7,10 @@ var Todo = React.createClass({
   },
 
   render: function(){
-    var {id, text, completed} = this.props;
+    var {id, text, showCompleted} = this.props;
     return (
       <div onClick={this.handleOnClick}>
-        <input type="checkbox" checked={completed} />
+        <input type="checkbox" checked={showCompleted} />
         {text}
       </div>
     );

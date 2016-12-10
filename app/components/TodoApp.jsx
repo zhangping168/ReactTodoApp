@@ -22,7 +22,7 @@ var TodoApp = React.createClass({
     var newTodo = {
       id: uuid(),
       text:text,
-      completed:false
+      showCompleted:false
     };
 
     var prevTodos = this.state.todos.slice();
@@ -42,7 +42,7 @@ var TodoApp = React.createClass({
   handleToggle: function (id) {
     var updateTodos = this.state.todos.map((todo)=>{
       if(todo.id  === id){
-        todo.completed = !todo.completed;
+        todo.showCompleted = !todo.showCompleted;
       }
       return todo;
     });
@@ -52,11 +52,14 @@ var TodoApp = React.createClass({
     });
   },
   render: function(){
-    var {todos} = this.state;
+
+    var {todos, showCompleted, searchText} = this.state;
+    var filterTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
+
     return (
       <div>
         <TodoSearch onSearch={this.handleSearch}/>
-        <TodoList todos ={todos} onToggle={this.handleToggle}/>
+        <TodoList todos={filterTodos} onToggle={this.handleToggle}/>
         <AddTodoForm onAddTodo={this.handleTodo}/>
       </div>
     );
