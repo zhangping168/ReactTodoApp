@@ -1,4 +1,5 @@
 var React = require('react');
+var moment = require('moment');
 
 var Todo = React.createClass({
   handleOnClick: function(){
@@ -7,11 +8,22 @@ var Todo = React.createClass({
   },
 
   render: function(){
-    var {id, text, showCompleted} = this.props;
+    var {id, text, showCompleted, createdAt,completedAt} = this.props;
+    var renderDate = ()=>{
+      var message ="Created At ";
+      var timestamp = createdAt;
+
+      if(showCompleted){
+        message ="Completed At ";
+        timestamp = completedAt;
+      }
+      return message + moment.unix(timestamp).format('MMM Do YYYY @ H:mm a');
+    };
     return (
       <div onClick={this.handleOnClick}>
         <input type="checkbox" checked={showCompleted} />
-        {text}
+        <p>{text}</p>
+        <p>{renderDate()}</p>
       </div>
     );
   }

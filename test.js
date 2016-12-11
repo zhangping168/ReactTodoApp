@@ -1,5 +1,8 @@
-var arrayA=[1,2];
-var arrayB=[11,22];
-var arrayC = [3, ...arrayA];
+var moment = require('moment');
+console.log(moment().format());
 
-console.log(arrayC);
+var now = moment();
+console.log('unix timestamp',now.unix());
+
+var currentTime = moment.unix(now);
+console.log('currentTime',currentTime.format());
